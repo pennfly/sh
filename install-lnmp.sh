@@ -3,7 +3,7 @@
 echo "https://webtatic.com/packages/php72/"
 yum -y install epel-release
 rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
-yum -y install php72w-fpm php72w-cli php72w-opcache php72w-common php72w-pdo php72w-mbstring php72w-xml php72w-gd php72w-mysqlnd php72w-intl php72w-soap
+yum -y install php72w-fpm php72w-cli php72w-opcache php72w-common php72w-pdo php72w-mbstring php72w-xml php72w-gd php72w-mysqlnd php72w-intl php72w-soap php-redis
 systemctl start php-fpm
 systemctl enable php-fpm
 curl -sS https://getcomposer.org/installer | php
