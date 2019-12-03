@@ -1,5 +1,5 @@
 #!/bin/bash
-
+yum install -y git
 echo "https://webtatic.com/packages/php72/"
 yum -y install epel-release
 rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
@@ -38,7 +38,7 @@ echo "|-http://downloads.mariadb.org/mariadb/repositories/"
 echo "|----------------------"
 uname -a
 echo "|----------------------"
-echo -n "U cpu is X86?:(y)"
+echo -n "U cpu is X86?:(y/n)"
 read mysql
 if [[ $mysql == "y" ]]; then
 	cat > /etc/yum.repos.d/MariaDB.repo <<EOF
@@ -99,5 +99,3 @@ EOF
 
 vim /etc/php-fpm.d/www.conf
 mysql_secure_installation
-
-yum install -y git
