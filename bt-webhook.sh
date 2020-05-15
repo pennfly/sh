@@ -1,32 +1,25 @@
-#根据宝塔webhook传入的参数自动统配所有项目。
-if [ ! -n "$1" ];
-then 
-          echo "param参数错误"
-          echo "End"
-          exit
-fi
-#替换为实际的站点地址
-webPath="/www/wwwroot/$1"
-#替换为自己的git目录
-gitUrl="git@github.com:user/$1.git"
-echo "Web站点路径：$webPath Git地址: $gitUrl"
+#根据宝塔webhook传入的参数自动统配所有项目。 后追加的参数为$(int) $1,$2...
 
+echo "Hook action Time:" $(date +"%Y-%m-%d %H:%M:%S")
+
+# 判断是否存在参数。
+if [ ! -n "$1" ];then 
+          echo "param参数不存在..."
+fi
+
+
+dir ="/www/wwwroot/$1"
 #判断项目路径是否存在
-if [ ! -d "$webPath" ]; then
-        mkdir -p $webPath
+if [ ! -d "$dir" ]; then
+        echo "Dir 目录不存在：$dir"
 fi
 
+echo "本次操作目录：$dir"
 cd $webPath
-#判断是否存在git目录
-if [ ! -d ".git" ]; then
-        echo "在该目录下克隆 git"
-        git clone $gitUrl gittemp
-        mv gittemp/.git .
-        rm -rf gittemp
-fi
+
 git reset --hard origin/master
 git pull origin master
-echo "做些事情吧  (^-^)"
-chown -R www:www $webPath
-echo "更新完成 - Finish"
+
+echo "Hook finish Time:" $(date +"%Y-%m-%d %H:%M:%S")
+echo
 exit
