@@ -69,3 +69,25 @@ SNA NAS
 
 sho processlist;
 
+
+
+
+
+
+
+## 配置全新两台一主一从
+
+[复制官方文档](https://mariadb.com/kb/en/replication-cluster-multi-master/)
+
+利用dockers来处理 
+
+```console
+docker run --name db-master -e MYSQL_ROOT_PASSWORD=123456 -d mariadb:latest
+```
+
+```
+docker run --name db-slave -e MYSQL_ROOT_PASSWORD=123456 -d mariadb:latest
+```
+
+
+
